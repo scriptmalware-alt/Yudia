@@ -2,9 +2,17 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+
+<!-- WAJIB biar responsive -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Dompet Digital</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: Arial;
@@ -12,54 +20,59 @@ body {
     color: white;
 }
 
+/* CONTAINER FULL HP */
 .container {
-    max-width: 420px;
-    margin: auto;
+    width: 100%;
     padding: 15px;
 }
 
 /* CARD ATAS */
 .top-card {
+    width: 100%;
     background: linear-gradient(135deg, #3a2a0f, #000);
     border-radius: 15px;
     padding: 20px;
-    position: relative;
     box-shadow: 0 0 20px rgba(255,200,0,0.2);
 }
 
 .top-card h3 {
     margin: 0;
-    font-size: 14px;
-    opacity: 0.8;
+    font-size: 13px;
+    opacity: 0.7;
 }
 
 .balance {
-    font-size: 28px;
+    font-size: 6vw; /* auto ikut layar */
+    font-weight: bold;
     margin: 10px 0;
 }
 
 .actions {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
 }
 
 .actions button {
-    padding: 8px 15px;
+    flex: 1;
+    padding: 10px;
     border-radius: 20px;
     border: 1px solid purple;
     background: transparent;
     color: violet;
-    cursor: pointer;
+    font-size: 14px;
 }
 
 /* INFO */
 .info-box {
+    width: 100%;
     background: #1c1c1c;
     padding: 12px;
     border-radius: 10px;
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
+    font-size: 14px;
 }
 
 /* TAB */
@@ -71,11 +84,12 @@ body {
 
 .tabs button {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
     border-radius: 10px;
     border: none;
     background: #2a2a2a;
     color: white;
+    font-size: 14px;
 }
 
 /* LIST */
@@ -84,6 +98,7 @@ body {
 }
 
 .item {
+    width: 100%;
     background: #1c1c1c;
     padding: 15px;
     border-radius: 10px;
@@ -91,13 +106,13 @@ body {
 }
 
 .item .title {
-    font-size: 14px;
+    font-size: 13px;
     opacity: 0.7;
 }
 
 .item .money {
     color: #00e676;
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 5px;
 }
 </style>
@@ -108,7 +123,6 @@ body {
 
 <div class="container">
 
-    <!-- CARD ATAS -->
     <div class="top-card">
         <h3>Saldo Dompet</h3>
         <div class="balance">Rp 919,764</div>
@@ -119,7 +133,6 @@ body {
         </div>
     </div>
 
-    <!-- INFO -->
     <div class="info-box">
         <span>Jumlah imbalan aktif</span>
         <span>Rp 0</span>
@@ -130,23 +143,16 @@ body {
         <span>Rp 919,764</span>
     </div>
 
-    <!-- TAB -->
     <div class="tabs">
         <button>Keuntungan harian</button>
         <button>Detail</button>
     </div>
 
-    <!-- LIST -->
     <div class="list">
 
         <div class="item">
             <div class="title">Keuntungan dari aktivitas dividen</div>
             <div class="money">Rp 99,000</div>
-        </div>
-
-        <div class="item">
-            <div class="title">Keuntungan dari aktivitas dividen</div>
-            <div class="money">Rp 17,100</div>
         </div>
 
         <div class="item">
