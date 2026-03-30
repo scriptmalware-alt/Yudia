@@ -2,17 +2,10 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-
-<!-- WAJIB biar responsive -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Dompet Digital</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
-
 body {
     margin: 0;
     font-family: Arial;
@@ -20,100 +13,68 @@ body {
     color: white;
 }
 
-/* CONTAINER FULL HP */
 .container {
-    width: 100%;
     padding: 15px;
 }
 
-/* CARD ATAS */
 .top-card {
-    width: 100%;
     background: linear-gradient(135deg, #3a2a0f, #000);
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 0 20px rgba(255,200,0,0.2);
-}
-
-.top-card h3 {
-    margin: 0;
-    font-size: 13px;
-    opacity: 0.7;
 }
 
 .balance {
-    font-size: 6vw; /* auto ikut layar */
-    font-weight: bold;
+    font-size: 6vw;
     margin: 10px 0;
 }
 
 .actions {
     display: flex;
-    justify-content: space-between;
     gap: 10px;
 }
 
-.actions button {
+button {
     flex: 1;
     padding: 10px;
     border-radius: 20px;
     border: 1px solid purple;
     background: transparent;
     color: violet;
-    font-size: 14px;
 }
 
-/* INFO */
 .info-box {
-    width: 100%;
     background: #1c1c1c;
     padding: 12px;
     border-radius: 10px;
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
 }
 
-/* TAB */
 .tabs {
     display: flex;
-    margin-top: 15px;
     gap: 10px;
+    margin-top: 15px;
 }
 
 .tabs button {
-    flex: 1;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
     background: #2a2a2a;
     color: white;
-    font-size: 14px;
+    border: none;
 }
 
-/* LIST */
 .list {
     margin-top: 15px;
 }
 
 .item {
-    width: 100%;
     background: #1c1c1c;
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 10px;
 }
-
-.item .title {
-    font-size: 13px;
-    opacity: 0.7;
-}
-
-.item .money {
+.money {
     color: #00e676;
-    font-size: 16px;
-    margin-top: 5px;
 }
 </style>
 
@@ -124,45 +85,88 @@ body {
 <div class="container">
 
     <div class="top-card">
-        <h3>Saldo Dompet</h3>
-        <div class="balance">Rp 919,764</div>
+        <div>Saldo Dompet</div>
+        <div class="balance" id="saldo">Rp 100000</div>
 
         <div class="actions">
-            <button>Penarikan</button>
-            <button>Isi Ulang</button>
+            <button onclick="tarik()">Penarikan</button>
+            <button onclick="isi()">Isi Ulang</button>
         </div>
     </div>
 
     <div class="info-box">
         <span>Jumlah imbalan aktif</span>
-        <span>Rp 0</span>
+        <span id="imbalan">Rp 0</span>
     </div>
 
     <div class="info-box">
         <span>Saldo Dompet</span>
-        <span>Rp 919,764</span>
+        <span id="saldo2">Rp 100000</span>
     </div>
 
     <div class="tabs">
-        <button>Keuntungan harian</button>
-        <button>Detail</button>
+        <button onclick="tambahProfit()">Keuntungan harian</button>
+        <button onclick="lihatDetail()">Detail</button>
     </div>
 
-    <div class="list">
-
-        <div class="item">
-            <div class="title">Keuntungan dari aktivitas dividen</div>
-            <div class="money">Rp 99,000</div>
-        </div>
-
-        <div class="item">
-            <div class="title">Keuntungan dari aktivitas dividen</div>
-            <div class="money">Rp 17,100</div>
-        </div>
-
-    </div>
+    <div class="list" id="list"></div>
 
 </div>
+
+<script>
+let saldo = 100000;
+let imbalan = 0;
+
+function format(uang){
+    return "Rp " + uang.toLocaleString("id-ID");
+}
+
+function updateUI(){
+    document.getElementById("saldo").innerText = format(saldo);
+    document.getElementById("saldo2").innerText = format(saldo);
+    document.getElementById("imbalan").innerText = format(imbalan);
+}
+
+function isi(){
+    let jumlah = prompt("Masukkan jumlah isi ulang:");
+    if(jumlah){
+        saldo += parseInt(jumlah);
+        updateUI();
+    }
+}
+
+function tarik(){
+    let jumlah = prompt("Masukkan jumlah penarikan:");
+    if(jumlah && saldo >= jumlah){
+        saldo -= parseInt(jumlah);
+        updateUI();
+    } else {
+        alert("Saldo tidak cukup!");
+    }
+}
+
+function tambahProfit(){
+    let profit = Math.floor(Math.random() * 50000) + 10000;
+    imbalan += profit;
+    saldo += profit;
+
+    let item = document.createElement("div");
+    item.className = "item";
+    item.innerHTML = `
+        <div>Keuntungan harian</div>
+        <div class="money">${format(profit)}</div>
+    `;
+    document.getElementById("list").prepend(item);
+
+    updateUI();
+}
+
+function lihatDetail(){
+    alert("Total keuntungan: " + format(imbalan));
+}
+
+updateUI();
+</script>
 
 </body>
 </html>
